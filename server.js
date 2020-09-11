@@ -1,15 +1,14 @@
 require('dotenv').config();
 const Discord = require('discord.js');
-const botClient = new Discord.Client();
 const botCommands = require('./commands');
 
+const TOKEN = process.env.TOKEN;
+const botClient = new Discord.Client();
 botClient.commands = new Discord.Collection();
 
 Object.keys(botCommands).map(key => {
   botClient.commands.set(botCommands[key].name, botCommands[key]);
 });
-
-const TOKEN = process.env.TOKEN;
 
 botClient.login(TOKEN);
 
@@ -28,6 +27,6 @@ botClient.on('message', msg => {
     botClient.commands.get(command).execute(msg, args);
   } catch (error) {
     console.error(error);
-    msg.reply('there was an error trying to execute that command!');
+    msg.reply('Error executing command! (Check the player/team name spelling)');
   }
 });
