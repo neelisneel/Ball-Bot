@@ -1,0 +1,27 @@
+{
+  "name": "swish-stats",
+  "version": "1.0.0",
+  "description": "Discord Bot which provides NBA player/team statistics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neelisneel/Swish-Stats.git"
+  },
+  "author": "Neel Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neelisneel/Swish-Stats/issues"
+  },
+  "homepage": "https://github.com/neelisneel/Swish-Stats#readme",
+  "dependencies": {
+    "@types/node": "^14.10.0",
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "enmap": "^5.7.1",
+    "nba": "^4.13.0",
+    "winston": "^3.3.3"
+  }
+}
