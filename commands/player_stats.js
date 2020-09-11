@@ -1,5 +1,5 @@
 const NBA = require("nba");
-
+const Discord = require("discord.js");
 
 module.exports = {
     name: '!player',
@@ -15,14 +15,24 @@ module.exports = {
                 console.error("Illegal season input, must be in format XXXX-XX")
                 msg.reply('Illegal season argument. Example input season: 2015-16')
             }
-
+            
+            const embedMsg = new Discord.MessageEmbed()
+                .setColor('#33a0ff')
+            
             NBA.stats.playerSplits({PlayerID: player.playerId, Season: season})
-                .then(value => console.log(value.overallPlayerDashboard));
+                .then(value => {
+                    let splits = value.overallPlayerDashboard.pop();
+                });
 
             NBA.stats.playerInfo({PlayerID: player.playerId, Season: season})
-                .then(value => console.log(value.commonPlayerInfo));
+                .then(value => {
+                    let info = value.commonPlayerInfo.pop();
+                    embedMsg.setTitle(`${info.displayFirstLast}'s ${args[2]} season profile`)
+                    msg.channel.send(embedMsg)
+                });
+            
+            
 
-            msg.channel.send(player.playerId);
         }
         else{
             console.error("Illegal number of arguments - requires 3");
