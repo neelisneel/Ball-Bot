@@ -1,30 +1,30 @@
 require('dotenv').config();
-const Discord = require('discord.js');
-const botCommands = require('./commands');
-
+const DISCORD = require('discord.js');
+const COMMANDS = require('./commands');
 const TOKEN = process.env.TOKEN;
-const botClient = new Discord.Client();
-botClient.commands = new Discord.Collection();
+const CLIENT = new DISCORD.Client();
 
-Object.keys(botCommands).map(key => {
-  botClient.commands.set(botCommands[key].name, botCommands[key]);
+CLIENT.commands = new DISCORD.Collection();
+
+Object.keys(COMMANDS).map(key => {
+  CLIENT.commands.set(COMMANDS[key].name, COMMANDS[key]);
 });
 
-botClient.login(TOKEN);
+CLIENT.login(TOKEN);
 
-botClient.on('ready', () => {
-  console.info(`Logged in as ${botClient.user.tag}!`);
+CLIENT.on('ready', () => {
+  console.info(`Logged in as ${CLIENT.user.tag}!`);
 });
 
-botClient.on('message', msg => {
+CLIENT.on('message', msg => {
   const args = msg.content.split(/ +/);
   const command = args.shift().toLowerCase();
   console.info(`Called command: ${command}`);
 
-  if (!botClient.commands.has(command)) return;
+  if (!CLIENT.commands.has(command)) return;
 
   try {
-    botClient.commands.get(command).execute(msg, args);
+    CLIENT.commands.get(command).execute(msg, args);
   } catch (error) {
     console.error(error);
     msg.reply('Error executing command! (Check the player/team name spelling)');
