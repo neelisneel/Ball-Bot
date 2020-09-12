@@ -1,5 +1,5 @@
 const NBA = require("nba");
-const Discord = require("discord.js");
+const embed = require('./embed.js')
 
 module.exports = {
     name: '!playerinfo',
@@ -8,11 +8,7 @@ module.exports = {
         if(args.length == 2){
             const playerName = args[0] + ' ' + args[1];
             const player = NBA.findPlayer(playerName);
-            
-            const embedMsg = new Discord.MessageEmbed()
-                .setColor('#33a0ff')
-                .attachFiles('./assets/github.png')
-                .setAuthor('Author: Neel', 'attachment://github.png', 'https://github.com/neelisneel/');
+            embedMsg = embed.createEmbed();
 
             NBA.stats.playerInfo({PlayerID: player.playerId})
                 .then(value => {
