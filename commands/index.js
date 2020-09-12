@@ -1,4 +1,5 @@
 module.exports = {
     Ping: require('./ping'),
-    PlayerStats: require('./player_profile')
+    PlayerInfo: require('./player_profile'),
+    PlayerStats: require('./player_stats')
   };

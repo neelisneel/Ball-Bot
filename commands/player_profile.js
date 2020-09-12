@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: '!playerinfo',
-    description: 'Provides NBA player profile - Requires first and last name',
+    description: 'Provides NBA player profile',
     execute(msg, args) {
         if(args.length == 2){
             const playerName = args[0] + ' ' + args[1];
@@ -31,9 +31,9 @@ module.exports = {
                             🚶‍♂️ Height/Weight: ***${info.height} feet/${info.weight} lbs***\n
                             🗒️ Draft Selection: ***${draftInfo}***\n
                             👕 Jersey Number: ***${info.jersey}***`
-                        )
+                        );
                     
-                    msg.channel.send(embedMsg)
+                    msg.channel.send(embedMsg);
                 });
         }
         else{
