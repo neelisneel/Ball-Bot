@@ -1,7 +1,9 @@
 require('dotenv').config();
 const NBA = require("nba");
+const Embed = require('../helper_modules/embed.js');
+const TeamColour = require("nba-color");
+
 const PLAYER_IMAGES = process.env.PLAYER_IMAGES;
-const EMBED = require('../helper_modules/embed.js');
 
 module.exports = {
     name: '!playerinfo',
@@ -10,7 +12,7 @@ module.exports = {
         if(args.length == 2){
             const playerName = args[0] + ' ' + args[1];
             const player = NBA.findPlayer(playerName);
-            const embedMsg = EMBED.createEmbed();
+            const embedMsg = Embed.createEmbed();
 
             NBA.stats.playerInfo({PlayerID: player.playerId}).then(value => {
                 const info = value.commonPlayerInfo.pop();
@@ -20,6 +22,7 @@ module.exports = {
                 `${info.draftYear} round ${info.draftRound} pick ${info.draftNumber}`);
 
                 embedMsg
+                    .setColor(TeamColour.getMainColor(info.teamAbbreviation).hex)
                     .setThumbnail(`${PLAYER_IMAGES}${args[1]}/${args[0]}`)
                     .setTitle(`__🏀 ${info.displayFirstLast}'s NBA player profile 🏀__`)
                     .addField(
@@ -32,7 +35,7 @@ module.exports = {
                         🗒️ Draft Selection: ***${draftInfo}***\n
                         👕 Jersey Number: ***${info.jersey}***`
                     );
-               
+                
                 msg.channel.send(embedMsg);
             });
         }

@@ -1,13 +1,14 @@
 require('dotenv').config();
-const DISCORD = require('discord.js');
-const COMMANDS = require('./commands');
+const Discord = require('discord.js');
+const Commands = require('./commands');
+
 const TOKEN = process.env.TOKEN;
-const CLIENT = new DISCORD.Client();
+const CLIENT = new Discord.Client();
 
-CLIENT.commands = new DISCORD.Collection();
+CLIENT.commands = new Discord.Collection();
 
-Object.keys(COMMANDS).map(key => {
-  CLIENT.commands.set(COMMANDS[key].name, COMMANDS[key]);
+Object.keys(Commands).map(key => {
+  CLIENT.commands.set(Commands[key].name, Commands[key]);
 });
 
 CLIENT.login(TOKEN);
